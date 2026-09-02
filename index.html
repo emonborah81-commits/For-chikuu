@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#fff8fa">
+<title>For Chiku ❤️</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  width:100%;
+  min-height:100vh;
+  overflow-x:hidden;
+  background:#fff9fa;
+  color:#5a454d;
+  font-family:Georgia,"Times New Roman",serif;
+}
+
+/* =========================
+   OPENING
+========================= */
+
+#opening{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 15% 20%,#f8dce5 0,transparent 30%),
+    radial-gradient(circle at 85% 25%,#eee5f7 0,transparent 30%),
+    radial-gradient(circle at 50% 90%,#fff0e9 0,transparent 35%),
+    #fffaf9;
+  transition:opacity 1s ease,visibility 1s ease;
+}
+
+#opening.hide{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.glow{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(45px);
+  pointer-events:none;
+}
+
+.glow1{
+  width:180px;
+  height:180px;
+  background:rgba(245,180,201,.3);
+  top:-50px;
+  left:-50px;
+  animation:float1 7s ease-in-out infinite;
+}
+
+.glow2{
+  width:220px;
+  height:220px;
+  background:rgba(225,211,242,.3);
+  right:-80px;
+  bottom:10%;
+  animation:float2 9s ease-in-out infinite;
+}
+
+@keyframes float1{
+  0%,100%{transform:translate(0,0)}
+  50%{transform:translate(20px,25px)}
+}
+
+@keyframes float2{
+  0%,100%{transform:translate(0,0)}
+  50%{transform:translate(-20px,-25px)}
+}
+
+/* =========================
+   PARTICLES
+========================= */
+
+.particles{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.dot{
+  position:absolute;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:rgba(205,120,146,.4);
+  animation:rise linear infinite;
+}
+
+@keyframes rise{
+  0%{
+    transform:translateY(110vh);
+    opacity:0;
+  }
+  15%{opacity:.6}
+  80%{opacity:.4}
+  100%{
+    transform:translateY(-10vh);
+    opacity:0;
+  }
+}
+
+.floatHeart{
+  position:absolute;
+  color:rgba(205,120,146,.35);
+  animation:riseHeart linear infinite;
+}
+
+@keyframes riseHeart{
+  0%{
+    transform:translateY(110vh) rotate(0);
+    opacity:0;
+  }
+  15%{opacity:.6}
+  80%{opacity:.35}
+  100%{
+    transform:translateY(-15vh) rotate(15deg);
+    opacity:0;
+  }
+}
+
+/* =========================
+   OPENING CONTENT
+========================= */
+
+.openContent{
+  position:relative;
+  z-index:10;
+  width:90%;
+  max-width:420px;
+  text-align:center;
+}
+
+.smallText{
+  margin-bottom:30px;
+  color:#866c75;
+  font-size:17px;
+  font-style:italic;
+  animation:appear 1.2s ease forwards;
+}
+
+@keyframes appear{
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* =========================
+   ENVELOPE
+========================= */
+
+.envelopeArea{
+  position:relative;
+  width:300px;
+  height:220px;
+  margin:0 auto 35px;
+}
+
+.envelope{
+  position:absolute;
+  width:300px;
+  height:180px;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+  transition:transform 1s ease;
+}
+
+.envelopeBody{
+  position:absolute;
+  inset:0;
+  border-radius:16px;
+  overflow:hidden;
+  background:linear-gradient(135deg,#fffefe,#f9dfe7);
+  border:1px solid rgba(190,105,132,.2);
+  box-shadow:0 20px 40px rgba(160,90,115,.18);
+}
+
+.envelopeBody:before{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0;
+  height:0;
+  border-left:150px solid transparent;
+  border-right:150px solid transparent;
+  border-bottom:100px solid rgba(244,199,211,.55);
+}
+
+.envelopeBody:after{
+  content:"";
+  position:absolute;
+  right:0;
+  bottom:0;
+  width:0;
+  height:0;
+  border-left:150px solid transparent;
+  border-right:150px solid transparent;
+  border-bottom:100px solid rgba(255,239,243,.7);
+}
+
+.flap{
+  position:absolute;
+  z-index:5;
+  top:0;
+  left:0;
+  width:100%;
+  height:110px;
+  transform-origin:top center;
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  background:linear-gradient(135deg,#f7d9e2,#efbdce);
+  transition:transform 1s ease;
+}
+
+.letter{
+  position:absolute;
+  z-index:2;
+  left:7%;
+  bottom:8px;
+  width:86%;
+  height:130px;
+  border-radius:12px;
+  background:#fffefd;
+  box-shadow:0 5px 15px rgba(160,90,115,.12);
+  transition:transform 1s ease;
+}
+
+.letter:before{
+  content:"♥";
+  position:absolute;
+  left:50%;
+  top:30px;
+  transform:translateX(-50%);
+  color:#cc728d;
+  font-size:25px;
+}
+
+.seal{
+  position:absolute;
+  z-index:10;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  color:#c76b87;
+  box-shadow:0 5px 15px rgba(150,80,105,.15);
+  transition:opacity .4s ease;
+}
+
+.envelope.opened .flap{
+  transform:rotateX(180deg);
+}
+
+.envelope.opened .letter{
+  transform:translateY(-75px);
+}
+
+.envelope.opened .seal{
+  opacity:0;
+}
+
+.envelope.opened{
+  transform:translateX(-50%) translateY(8px);
+}
+
+/* =========================
+   OPEN BUTTON
+========================= */
+
+#openBtn{
+  border:1px solid rgba(190,105,132,.25);
+  background:rgba(255,255,255,.82);
+  color:#ad6079;
+  padding:15px 30px;
+  min-width:165px;
+  border-radius:50px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 12px 30px rgba(160,90,115,.14);
+  transition:transform .2s ease,box-shadow .2s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+
+#openBtn:active{
+  transform:scale(.94);
+}
+
+#openBtn:disabled{
+  opacity:.7;
+}
+
+/* =========================
+   MAIN WEBSITE
+========================= */
+
+#main{
+  display:none;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 10% 10%,rgba(249,215,225,.3),transparent 25%),
+    radial-gradient(circle at 90% 20%,rgba(233,222,244,.25),transparent 25%),
+    #fffaf9;
+}
+
+#main.show{
+  display:block;
+  animation:mainAppear 1.4s ease;
+}
+
+@keyframes mainAppear{
+  from{
+    opacity:0;
+    transform:translateY(25px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  min-height:90vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:40px 22px;
+  position:relative;
+}
+
+.heroContent{
+  max-width:650px;
+}
+
+.heroSmall{
+  color:#aa7b89;
+  font-family:Arial,sans-serif;
+  font-size:12px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:20px;
+}
+
+.hero h1{
+  color:#594149;
+  font-size:clamp(43px,12vw,76px);
+  font-weight:500;
+  line-height:1.05;
+}
+
+.hero p{
+  margin-top:20px;
+  color:#806b73;
+  font-size:20px;
+  font-style:italic;
+  line-height:1.6;
+}
+
+.scroll{
+  position:absolute;
+  bottom:25px;
+  color:#b28b96;
+  font-family:Arial,sans-serif;
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  animation:breathe 2.5s ease-in-out infinite;
+}
+
+.scrollLine{
+  width:1px;
+  height:30px;
+  background:#d394a8;
+  margin:10px auto 0;
+}
+
+@keyframes breathe{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(7px)}
+}
+
+/* =========================
+   LETTER
+========================= */
+
+.letterSection{
+  padding:20px 15px 90px;
+}
+
+.paper{
+  max-width:760px;
+  margin:auto;
+  padding:38px 22px 50px;
+  border-radius:25px;
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(205,125,148,.17);
+  box-shadow:0 25px 70px rgba(160,90,115,.1);
+}
+
+.paperTop{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.paperHeart{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:#fbe4ea;
+  color:#c66f89;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 15px;
+}
+
+.paper h2{
+  color:#654b53;
+  font-size:25px;
+  font-weight:500;
+}
+
+.divider{
+  width:65px;
+  height:1px;
+  margin:17px auto;
+  background:#d99aad;
+}
+
+.text{
+  font-size:17px;
+  line-height:1.95;
+  color:#5d4b51;
+}
+
+.paragraph{
+  margin-bottom:28px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+
+.paragraph.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.highlight{
+  margin:35px 0;
+  padding:23px 18px;
+  text-align:center;
+  border-radius:18px;
+  background:linear-gradient(135deg,#fce7ed,#f5eff9);
+  border:1px solid rgba(200,120,145,.15);
+  color:#704b58;
+}
+
+.mini{
+  text-align:center;
+  color:#cf829b;
+  margin:35px 0;
+}
+
+/* =========================
+   FINAL
+========================= */
+
+.final{
+  min-height:95vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:70px 22px;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(249,211,223,.35),transparent 30%),
+    radial-gradient(circle at 80% 75%,rgba(230,219,244,.3),transparent 30%),
+    #fffaf9;
+}
+
+.finalInner{
+  max-width:600px;
+}
+
+.finalSmall{
+  color:#ad7d8a;
+  font-family:Arial,sans-serif;
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:22px;
+}
+
+.final h2{
+  color:#60434c;
+  font-size:clamp(31px,8vw,52px);
+  line-height:1.25;
+  font-weight:500;
+}
+
+.final p{
+  margin-top:28px;
+  color:#806b73;
+  font-size:17px;
+  line-height:1.8;
+}
+
+.signature{
+  margin-top:35px;
+  color:#b56d83;
+  font-style:italic;
+  font-size:18px;
+}
+
+.finalLove{
+  margin-top:30px;
+  color:#b35e77;
+  font-size:clamp(25px,7vw,40px);
+}
+
+/* =========================
+   MUSIC
+========================= */
+
+#musicBtn{
+  position:fixed;
+  right:17px;
+  bottom:20px;
+  z-index:5000;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  border:1px solid rgba(200,120,145,.25);
+  background:rgba(255,255,255,.9);
+  color:#b46079;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  box-shadow:0 10px 28px rgba(160,90,115,.16);
+  cursor:pointer;
+}
+
+#musicBtn.show{
+  display:flex;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:380px){
+  .envelopeArea,
+  .envelope{
+    width:270px;
+  }
+
+  .envelope{
+    height:165px;
+  }
+
+  .envelopeBody:before,
+  .envelopeBody:after{
+    border-left-width:135px;
+    border-right-width:135px;
+  }
+
+  .text{
+    font-size:16px;
+  }
+}
+
+@media(min-width:600px){
+  .paper{
+    padding:60px 60px 70px;
+  }
+
+  .text{
+    font-size:18px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     OPENING SCREEN
+====================================================== -->
+
+<section id="opening">
+
+  <div class="glow glow1"></div>
+  <div class="glow glow2"></div>
+
+  <div class="particles" id="particles"></div>
+
+  <div class="openContent">
+
+    <div class="smallText">
+      A little something for you…
+    </div>
+
+    <div class="envelopeArea">
+
+      <div class="envelope" id="envelope">
+
+        <div class="letter"></div>
+
+        <div class="envelopeBody"></div>
+
+        <div class="flap"></div>
+
+        <div class="seal">
+          ♥
+        </div>
+
+      </div>
+
+    </div>
+
+    <button id="openBtn" type="button">
+      OPEN ❤️
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     MAIN WEBSITE
+====================================================== -->
+
+<main id="main">
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="heroContent">
+
+      <div class="heroSmall">
+        Just for you
+      </div>
+
+      <h1>
+        Hey Chiku… ❤️
+      </h1>
+
+      <p>
+        I made this little place for you.
+      </p>
+
+    </div>
+
+    <div class="scroll">
+      A little further
+      <div class="scrollLine"></div>
+    </div>
+
+  </section>
+
+
+  <!-- LETTER -->
+
+  <section class="letterSection">
+
+    <article class="paper">
+
+      <div class="paperTop">
+
+        <div class="paperHeart">
+          ♥
+        </div>
+
+        <h2>
+          Something I wanted to tell you
+        </h2>
+
+        <div class="divider"></div>
+
+      </div>
+
+      <div class="text">
+
+        <p class="paragraph">
+          Tum janti ho na main apni life main kisi ko itna seriously nhi leta tha... kisi ke liye itna feel karna, kisi ko itni importance dena mere liye kabhi easy nhi tha... but pata nhi tum kab meri life main itni important ban gayi 🥺
+        </p>
+
+        <p class="paragraph">
+          Ab sach bolu toh tumhe khone se darr lagta hai... bohot zyada. Pehle mujhe farak nhi padta tha koi rahe ya chala jaye, but tumhare case main aisa nhi hai... tumhe lose karne ka thought bhi mujhe andar se bohot hurt karta hai.
+        </p>
+
+        <p class="paragraph">
+          Tum janti ho mere trust issues kitne hai... main easily kisi pe trust nhi karta, har chiz ko overthink karta hoon, kabhi kabhi bina reason ke bhi zyada soch leta hoon... but tumhare saath maine dheere dheere trust karna sikha hai. Ab mujhe tum par yakeen hai... sach main hai.
+        </p>
+
+        <div class="highlight paragraph">
+          Ab mujhe tum par yakeen hai... sach main hai.
+        </div>
+
+        <p class="paragraph">
+          Bas please mere is trust ko kabhi break hone mat dena 🥺 Maine bohot mushkil se kisi ko itna trust kiya hai. Main nhi chahta kabhi aisa din aaye jab mujhe lage ki tum par trust karna meri galti thi.
+        </p>
+
+        <p class="paragraph">
+          Mujhe tumhare past se koi lena dena nhi hai. Kisi ne tumhare baare main kya kaha, kisne kya bola... mujhe honestly usse koi farak nhi padta. Mujhe bas tumhari baat par believe karna hai. Tum jaisi bhi ho, jo bhi ho, main tumhe waise hi accept karta hoon. Mujhe tumhe kisi aur ke according judge nhi karna.
+        </p>
+
+        <div class="mini">♥</div>
+
+        <p class="paragraph">
+          Aur ek baat... main ye nhi bolunga ki humare beech kabhi ladai nhi hogi. Ladai hongi, misunderstandings hongi, kabhi main tumse naraz hounga, kabhi tum mujhse naraz hogi... galti mujhse bhi hogi aur tumse bhi ho sakti hai. But main bas ye chahta hoon ki kisi bhi ladai ke baad hum ek dusre ko chhodne ke baare main na soche... baat kare, samjhe aur sort out kare. ❤️
+        </p>
+
+        <p class="paragraph">
+          Tum mujhe kuch bhi bata sakti ho... literally kuch bhi. Jo baat tum kisi aur ko nhi bata paati, woh bhi mujhe bata sakti ho. Mere saamne comfortable rehna, apne feelings ko hide mat karna. Main tumhe judge nhi karunga. Agar tum sad ho toh mujhe batao, agar tumhe gussa hai toh mujhpe gussa karo, agar mujhse koi complaint hai toh woh bhi bolo... main sununga.
+        </p>
+
+        <p class="paragraph">
+          Main perfect nhi hoon... mujhse bhi bohot galtiyan hongi. Kabhi main stupid behave karunga, kabhi tumhe hurt bhi kar sakta hoon bina jaan-bujhkar... but main hamesha apni galti samajhne aur sudharne ki koshish karunga. Main ye promise nhi karta ki mujhse kabhi galti nhi hogi... bas itna promise karta hoon ki tumhari feelings ko kabhi jaan-bujhkar ignore nhi karunga.
+        </p>
+
+        <p class="paragraph">
+          Main tumhare saath bohot saari choti choti cheezein karna chahta hoon... saath ghoomna hai, masti karni hai, random photos leni hai, bina kisi reason ke hasna hai 😂❤️ ek dusre ko pareshan karna hai aur bohot saari memories banani hai.
+        </p>
+
+        <p class="paragraph">
+          Maine tumhare saath bohot sapne dekhe hai... aur ab mann karta hai ki jo bhi sapne dekhe hai na, woh sab tumhare saath hi pura karu.
+        </p>
+
+        <div class="mini">✦</div>
+
+        <p class="paragraph">
+          Main sirf tumhara boyfriend nhi banna chahta... main tumhara best friend banna chahta hoon, tumhara comfort person banna chahta hoon... aisa insaan jiske paas tum bina soche aa sako, jiske saamne tumhe perfect banne ki zarurat na pade.
+        </p>
+
+        <p class="paragraph">
+          Main chahta hoon ki tum mere saath apne real self reh sako... bina kisi fear ke, bina kisi hesitation ke. Tum mujhe apni khushi bhi bata sako aur apni problems bhi. Tumhe mere saamne kuch hide karne ki zarurat na lage.
+        </p>
+
+        <p class="paragraph">
+          Aur agar kabhi life main sab kuch kharab chal raha ho, toh mere paas aa jaana... main shayad tumhari har problem solve na kar paun, but tumhare saath baith ke tumhari baat zaroor sun sakta hoon.
+        </p>
+
+        <p class="paragraph">
+          Maine pehle kabhi kisi ko itna seriously nhi liya tha... but tum different ho. Tum woh person ho jise khone se main ab darta hoon. Aur shayad isi liye tum mere liye itni special ho. ❤️
+        </p>
+
+        <p class="paragraph">
+          Main nhi jaanta future exactly kaisa hoga... but main itna zaroor jaanta hoon ki main tumhare saath bohot kuch jeena chahta hoon. Saath ghoomna hai, saath hasna hai, saath memories banani hai aur jo sapne humne dekhe hain unhe dheere dheere pura karna hai.
+        </p>
+
+        <p class="paragraph">
+          Aur end main bas itna kehna hai...
+        </p>
+
+        <p class="paragraph">
+          Mujhe nhi pata main tumhare liye kitna acha partner ban paunga. Mujhse galtiyan hongi, humare beech ladai bhi hongi, kabhi hum ek dusre ko samajh nhi payenge... but please uss waqt ek dusre se baat karna mat chhodna.
+        </p>
+
+        <p class="paragraph">
+          Agar kabhi main galat hounga toh mujhe samjha dena... agar main tumhe hurt karunga toh mujhe bata dena... agar mujhse koi mistake hogi toh mujhe sudharne ka chance dena. Main bhi tumhare liye wahi karunga.
+        </p>
+
+        <p class="paragraph">
+          Main chahta hoon ki hum sirf achhe time main nahi, balki difficult time main bhi ek dusre ke saath rahe. Aaj jo trust, care aur respect humare beech hai na... main chahta hoon ye sab hamesha rahe.
+        </p>
+
+        <div class="highlight paragraph">
+          Mujhe tum perfect nahi chahiye... mujhe bas tum chahiye, exactly jaisi tum ho. ❤️
+        </div>
+
+        <p class="paragraph">
+          Aur pata hai sabse sach baat kya hai?
+        </p>
+
+        <p class="paragraph">
+          Main pehle kisi ko khone se nhi darta tha... but ab tumhe khone ka darr lagta hai.
+        </p>
+
+        <p class="paragraph">
+          Shayad main har baar apni feelings ko sahi words main express na kar paun... kabhi stupid behave karunga, kabhi overthink karunga, kabhi tumhe irritate bhi karunga 😂 but jo bhi hai, jo bhi feel karta hoon... woh fake nhi hai.
+        </p>
+
+        <div class="highlight paragraph">
+          Tum mere liye bohot important ho. ❤️
+        </div>
+
+        <p class="paragraph">
+          Bas mera trust kabhi mat todna... aur jab bhi humare beech kuch galat ho, ek dusre se baat karna mat chhodna.
+        </p>
+
+        <div class="mini">♥</div>
+
+        <div class="highlight paragraph">
+          I love you soo much ❤️🥺
+        </div>
+
+        <p class="paragraph">
+          Please mere saath rehna... aur mujhe bhi tumhara saath nibhaane ka mauka dete rehna. ❤️
+        </p>
+
+      </div>
+
+    </article>
+
+  </section>
+
+
+  <!-- FINAL -->
+
+  <section class="final">
+
+    <div class="finalInner">
+
+      <div class="finalSmall">
+        For you, Chiku
+      </div>
+
+      <h2>
+        Some feelings are just too big for words.
+      </h2>
+
+      <p>
+        Thank you for every little moment,
+        every conversation, every laugh,
+        and every memory.
+      </p>
+
+      <div class="signature">
+        Made with love, just for you ❤️
+      </div>
+
+      <div class="finalLove">
+        I love you soo much. ❤️🥺
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- MUSIC -->
+
+<audio
+  id="music"
+  src="./music.mp3"
+  loop
+  preload="auto">
+</audio>
+
+<button id="musicBtn" type="button" aria-label="Pause music">
+  ❚❚
+</button>
+
+
+<script>
+
+/* =========================================================
+   CREATE PARTICLES
+========================================================= */
+
+const particles = document.getElementById("particles");
+
+for(let i=0;i<25;i++){
+
+  const dot = document.createElement("span");
+
+  dot.className = "dot";
+
+  dot.style.left = Math.random()*100 + "%";
+
+  dot.style.animationDuration =
+    (7 + Math.random()*8) + "s";
+
+  dot.style.animationDelay =
+    (-Math.random()*12) + "s";
+
+  particles.appendChild(dot);
+}
+
+
+for(let i=0;i<14;i++){
+
+  const heart = documen
